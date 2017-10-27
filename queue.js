@@ -17,7 +17,7 @@
     };
 
     Queue.prototype.size = function(){
-        return this.tail + 1;
+        return this.tail;
     };
     Queue.prototype.isEmpty = function(){
         return (this.size===0);
