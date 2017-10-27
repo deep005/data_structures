@@ -7,6 +7,8 @@
             this.data = data;
             this.next = null;
         };
+
+    // Inserting nodes one at a time into the list
     List.prototype.insert = function(val){
 
         var node = new LinkedNode(val);
@@ -21,6 +23,8 @@
             curr.next = node;
         }
     };
+
+    //removing nodes one at a time
     List.prototype.remove = function(data){
 
         var curr;
@@ -50,6 +54,49 @@
             return 'data not found';
         }
     };
+
+    //finding and returning the node whose data matches the value passed to the function
+    List.prototype.find = function(data){
+        var curr;
+        if(this.head === data)
+            return this.head;
+        else{
+            curr = this.head.next;
+            while(curr){
+                if(curr.data=== data)
+                    return curr;
+                curr = curr.next;
+            }
+            return 'data not found';
+        }
+    };
+
+    //printing the kth node to the last
+    List.prototype.nToLast = function(k){
+        var p1 = this.head,
+            p2= this.head,
+            i=0,
+            count=0,
+            curr= this.head;
+        while(curr){
+            count++;
+            curr = curr.next;
+        }
+        if(k<=count) {
+            for (i = 0; i < (k - 1); i++) {
+                p2 = p2.next;
+            }
+
+            while(p2.next){
+                p1= p1.next;
+                p2 = p2.next;
+            }
+            return p1;
+        }
+        else return 'Please enter a number less than or equal to count';
+    };
+
+    //traversing the list and printing it
     List.prototype.print = function(){
         if(this.head === null)
           console.log('list is empty');
@@ -77,5 +124,8 @@
     console.log(linked.remove('9'));
     console.log(linked.remove(4));
     console.log(linked.remove('a'));
+    console.log(linked.find(1));
+    console.log(linked.nToLast(9));
+    console.log(linked.nToLast(5));
     linked.print();
 }());
