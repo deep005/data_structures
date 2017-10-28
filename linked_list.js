@@ -96,6 +96,57 @@
         else return 'Please enter a number less than or equal to count';
     };
 
+    //reversing the linked list
+    List.prototype.reverse = function(){
+
+        var curr = this.head,
+            prev = null,
+            next = null;
+
+        while(curr){
+
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        this.head = prev;
+    };
+
+
+    //deleting the nth node
+    List.prototype.delete = function(n){
+
+        if(n===1){
+            var first = this.head;
+            this.head = this.head.next;
+            first = null;
+            return 'head deleted';
+        }
+        else {
+            var count = 1,
+                node=this.head.next,
+                prev=this.head;
+            while(node){
+                count++;
+                if(count === n)
+                    break;
+                prev = node;
+                node = node.next;
+            }
+            if(count === n) {
+                prev.next = node.next;
+                node = null;
+                return 'node deleted successfully;'
+            }
+            else{
+                return 'Please enter a number less than or equal to ' + count;
+            }
+        }
+
+    };
+
     //traversing the list and printing it
     List.prototype.print = function(){
         if(this.head === null)
@@ -121,11 +172,21 @@
     linked.insert('shanker');
     linked.insert('9');
     linked.print();
+    console.log('\n\n');
     console.log(linked.remove('9'));
     console.log(linked.remove(4));
     console.log(linked.remove('a'));
+    console.log('\n\n');
     console.log(linked.find(1));
     console.log(linked.nToLast(9));
     console.log(linked.nToLast(5));
     linked.print();
+    console.log('\n\n');
+    linked.reverse();
+    linked.reverse();
+    linked.print();
+    console.log(linked.delete(1));
+    console.log(linked.delete(9));
+    console.log(linked.delete(6));
+
 }());
