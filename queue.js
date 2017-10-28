@@ -29,7 +29,5 @@
     queue.enqueue(3);
     queue.enqueue(4);
     queue.dequeue();
-    console.log(queue);
     queue.dequeue();
-    console.log(queue);
 }());

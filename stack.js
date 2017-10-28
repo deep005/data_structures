@@ -21,7 +21,5 @@
     stack.push(3);
     stack.push(4);
     stack.pop();
-    console.log(stack);
     stack.pop();
-    console.log(stack);
 }());
