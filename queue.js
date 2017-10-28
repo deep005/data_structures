@@ -17,10 +17,10 @@
     };
 
     Queue.prototype.size = function(){
-        return this.tail;
+        return this.tail + 1;
     };
     Queue.prototype.isEmpty = function(){
-        return (this.size===0);
+        return (this.tail === -1);
     };
 
     var queue = new Queue();
