@@ -1,6 +1,6 @@
 ( function(){
 
-    var Queue = function(){
+    let Queue = function(){
         this.tail = -1;
         this._queue = [];
     };
@@ -23,7 +23,7 @@
         return (this.tail === -1);
     };
 
-    var queue = new Queue();
+    let queue = new Queue();
     queue.enqueue(1);
     queue.enqueue(2);
     queue.enqueue(3);

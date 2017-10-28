@@ -1,6 +1,6 @@
 ( function(){
 
-    var Stack = function(){
+    let Stack = function(){
         this.top = -1;
         this._stack = [];
     };
@@ -15,7 +15,7 @@
         this.top--;
     };
 
-    var stack = new Stack();
+    let stack = new Stack();
     stack.push(1);
     stack.push(2);
     stack.push(3);
