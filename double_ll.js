@@ -58,6 +58,19 @@
             curr = curr.next;
         }
     };
+    doubleList.prototype.find = function(data) {
+
+        var curr = this.head;
+
+        while (curr) {
+            if (curr.data === data) {
+                return curr;
+            }
+            curr = curr.next;
+        }
+        return 'data not found in the list';
+
+    };
     
     let double = new doubleList();
     let arr = ['a', 'b', 'c', 'd', 1, 2, 3, 'deep', 'shanker', '9'],
@@ -72,6 +85,8 @@
 
     double.print();
     console.log('\n\n');
+    console.log(double.find(2));
+    console.log(double.find(89));
     console.log(double.remove('deep'));
     double.print();
     console.log(double.remove('a'));
