@@ -1,6 +1,6 @@
 ( function(){
 
-    var List = function(){
+    let List = function(){
             this.head = null;
         },
         LinkedNode = function(data){
@@ -11,12 +11,12 @@
     // Inserting nodes one at a time into the list
     List.prototype.insert = function(val){
 
-        var node = new LinkedNode(val);
+        let node = new LinkedNode(val);
         if(this.head === null){
             this.head = node;
         }
         else {
-            var curr = this.head;
+            let curr = this.head;
             while(curr.next){
                 curr = curr.next;
             }
@@ -27,7 +27,7 @@
     //removing nodes one at a time
     List.prototype.remove = function(data){
 
-        var curr;
+        let curr;
         if(this.head === null){
             return 'List is empty';
         }
@@ -39,7 +39,7 @@
         }
         else {
             curr = this.head.next;
-            var prev = this.head;
+            let prev = this.head;
             while(curr){
                 if(curr.data === data){
                     prev.next = curr.next;
@@ -57,7 +57,7 @@
 
     //finding and returning the node whose data matches the value passed to the function
     List.prototype.find = function(data){
-        var curr;
+        let curr;
         if(this.head === data)
             return this.head;
         else{
@@ -73,7 +73,7 @@
 
     //printing the kth node to the last
     List.prototype.nToLast = function(k){
-        var p1 = this.head,
+        let p1 = this.head,
             p2= this.head,
             i=0,
             count=0,
@@ -93,13 +93,13 @@
             }
             return p1;
         }
-        else return 'Please enter a number less than or equal to count';
+        else return 'Please enter a number less than or equal to '+ count;
     };
 
     //reversing the linked list
     List.prototype.reverse = function(){
 
-        var curr = this.head,
+        let curr = this.head,
             prev = null,
             next = null;
 
@@ -118,14 +118,18 @@
     //deleting the nth node
     List.prototype.delete = function(n){
 
-        if(n===1){
-            var first = this.head;
+        if(n===1 && !this.head.next){
+            this.head = null;
+            return 'list deleted';
+        }
+        else if(n===1){
+            let first = this.head;
             this.head = this.head.next;
             first = null;
             return 'head deleted';
         }
         else {
-            var count = 1,
+            let count = 1,
                 node=this.head.next,
                 prev=this.head;
             while(node){
@@ -152,32 +156,31 @@
         if(this.head === null)
           console.log('list is empty');
         else{
-            var curr = this.head;
+            let curr = this.head;
             while(curr){
                 console.log(curr.data);
                 curr = curr.next;
             }
         }
     };
-    var linked = new List();
-    linked.insert('a');
-    linked.insert('b');
-    linked.insert('c');
-    linked.insert(2);
-    linked.insert(4);
-    linked.insert(1);
-    linked.insert(7);
-    linked.insert(6);
-    linked.insert('deep');
-    linked.insert('shanker');
-    linked.insert('9');
+    let linked = new List();
+
+    let arr = ['a', 'b', 'c', 'd', 1, 2, 3, 'deep', 'shanker', '9'],
+        len = arr.length,
+        ele, i =0;
+
+        while(i < len){
+            ele = arr.shift();
+            linked.insert(ele);
+            i++;
+        }
     linked.print();
     console.log('\n\n');
     console.log(linked.remove('9'));
     console.log(linked.remove(4));
     console.log(linked.remove('a'));
     console.log('\n\n');
-    console.log(linked.find(1));
+    console.log(linked.find(3));
     console.log(linked.nToLast(9));
     console.log(linked.nToLast(5));
     linked.print();
