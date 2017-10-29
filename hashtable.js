@@ -18,7 +18,7 @@
         return hashIndex % this.items.length;
     };
 
-    HashTable.add = function(val){
+    HashTable.prototype.add = function(val){
 
         // not overwriting the already existing keys
         if(this.lookup(val) === null){
@@ -31,11 +31,11 @@
             return 'node added successfully';
         }
         else{
-            return 'value is already there in the table';
+            return 'node with the given value is already there in the table';
         }
     };
 
-    HashTable.prototype.remove = function(){
+    HashTable.prototype.remove = function(val){
 
         let node = this.lookup(val);
 
@@ -75,4 +75,16 @@
         return null;
     };
 
+    let table = new HashTable();
+
+    // insert single node
+    console.log(table.add('dddddddddd'));
+
+    // create a collision based on the hash function
+    console.log(table.add('aaa'));
+    console.log(table.add('bbb'));
+    console.log(table.add('ccc'));
+    console.log(table.add('ccc'));
+    console.log(table.remove('bbb'));
+    console.log(table.remove('bbb'));
 }());
