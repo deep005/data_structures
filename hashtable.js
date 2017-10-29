@@ -8,6 +8,7 @@
         this.val = val;
         this.next = null;
     };
+
     HashTable.prototype.hash = function(val){
         let hashIndex = 0;
 
@@ -16,25 +17,62 @@
         }
         return hashIndex % this.items.length;
     };
-    Hashtable.add = function(val){
+
+    HashTable.add = function(val){
 
         // not overwriting the already existing keys
         if(this.lookup(val) === null){
-           let node = this.HashStruc(val),
+           let node = new HashStruc(val),
                hash = this.hash(val);
 
             node.val = val;
             node.next = this.items[hash];
             this.items[hash] = node;
+            return 'node added successfully';
+        }
+        else{
+            return 'value is already there in the table';
         }
     };
 
-    Hashtable.prototype.remove = function(){
+    HashTable.prototype.remove = function(){
 
+        let node = this.lookup(val);
+
+        if(node){
+            let hash = this.hash(val),
+                curr = this.items[hash],
+                prev = {};
+            while(curr){
+                //if the value is stored in the first node of the list
+                if(this.items[hash].val === val){
+                    this.items[hash] = this.items[hash].next;
+                    curr = null;
+                    return 'node removed successfully';
+                }
+                if(curr.val === val){
+                    prev.next = curr.next;
+                    curr = null;
+                    return 'node removed successfully';
+                }
+                prev = curr;
+                curr = curr.next;
+            }
+        }
+        return 'node with the given value is not present in the table';
     };
-    Hashtable.prototype.lookup = function(val){
 
+    HashTable.prototype.lookup = function(val){
 
+        let hash = this.hash(val),
+            node= this.items[hash];
+
+        while(node){
+            if(node.val === val)
+                return node;
+            node = node.next;
+        }
+        return null;
     };
 
 }());
