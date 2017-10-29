@@ -21,9 +21,11 @@
     HashTable.prototype.add = function(val){
 
         // not overwriting the already existing keys
-        if(this.lookup(val) === null){
-           let node = new HashStruc(val),
-               hash = this.hash(val);
+        let value = this.lookup(val),
+            hash = value.hash;
+
+        if(value.data === null){
+           let node = new HashStruc(val);
 
             node.val = val;
             node.next = this.items[hash];
@@ -40,7 +42,7 @@
         let node = this.lookup(val);
 
         if(node){
-            let hash = this.hash(val),
+            let hash = node.hash,
                 curr = this.items[hash],
                 prev = {};
             while(curr){
@@ -72,7 +74,7 @@
                 return node;
             node = node.next;
         }
-        return null;
+        return {data: null, hash: hash};
     };
 
     let table = new HashTable();
@@ -85,6 +87,7 @@
     console.log(table.add('bbb'));
     console.log(table.add('ccc'));
     console.log(table.add('ccc'));
-    console.log(table.remove('bbb'));
-    console.log(table.remove('bbb'));
+    /*console.log(table.remove('bbb'));
+    console.log(table.remove('bbb'));*/
+    console.log(table.items);
 }());
