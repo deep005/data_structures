@@ -14,8 +14,9 @@
         if(this.root === null)
             this.root = node;
         else
-            this.insertNode(node, this.root);
+           this.insertNode(node, this.root);
     };
+
     BinaryTree.prototype.insertNode = function(node, subtree){
         if(!subtree)
             subtree = node;
@@ -25,5 +26,21 @@
             subtree.right = this.insertNode(node, subtree.right);
         return subtree;
     };
-    
+
+    BinaryTree.prototype.locate = function(val){
+        if(this.root.val === val)
+            return this.root;
+        else
+            return this.locateNode(val, this.root);
+    };
+
+    BinaryTree.prototype.locateNode = function(val, root){
+
+        if(val === root.val)
+            return this.root;
+        else if(val <= root.val)
+            return this.locateNode(val, root.left);
+        else
+            return this.locateNode(val, root.right);
+    }
 }());
