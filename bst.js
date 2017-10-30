@@ -104,14 +104,28 @@
             result = [];
 
         while(node = queue.shift()){
-            result = queue.push(node.val);
+            result.push(node.val);
             node.left && queue.push(node.left);
             node.right && queue.push(node.right);
         }
         return result;
     };
 
-    
+    BinaryTree.prototype.BFSrtl = function(){
+
+        let node = this.root,
+            queue = [node],
+            result = [];
+
+        while(node = queue.shift()){
+            result.push(node.val);
+            node.right && queue.push(node.right);
+            node.left && queue.push(node.left);
+        }
+        return result;
+    };
+
+
 
     let tree = new BinaryTree();
     tree.insert(20);
@@ -129,4 +143,7 @@
     tree.printInOrder(tree.root);
     console.log('\n\n');
     tree.printPostOrder(tree.root);
+    console.log('\n\n');
+    console.log(tree.BFSltr());
+    console.log(tree.BFSrtl());
 }());
