@@ -64,6 +64,7 @@
         }
     };
 
+    //Depth first traversal of BST's
     BinaryTree.prototype.printPreOrder = function(subtree) {
 
         if(subtree !== null)
@@ -94,6 +95,23 @@
         }
 
     };
+
+    //Breadth first traversal for BST's
+    BinaryTree.prototype.BFSltr = function(){
+
+        let node = this.root,
+            queue = [node],
+            result = [];
+
+        while(node = queue.shift()){
+            result = queue.push(node.val);
+            node.left && queue.push(node.left);
+            node.right && queue.push(node.right);
+        }
+        return result;
+    };
+
+    
 
     let tree = new BinaryTree();
     tree.insert(20);
