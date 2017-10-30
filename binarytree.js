@@ -8,23 +8,34 @@
         this.right = null;
     };
 
-    BinaryTree.prototype.insert = function(val){
+    BinaryTree.prototype.insert = function(val) {
 
-        let node  = new BinaryNode(val);
-        if(this.root === null)
+        let node = new BinaryNode(val);
+        if (this.root === null) {
             this.root = node;
-        else
-           this.insertNode(node, this.root);
+        }
+        else {
+            this.insertNode(node, this.root);
+        }
+
     };
 
     BinaryTree.prototype.insertNode = function(node, subtree){
-        if(!subtree)
-            subtree = node;
-        if(node.val <= subtree.val)
-            subtree.left = this.insertNode(node, subtree.left);
-        if(node.val > subtree.val)
-            subtree.right = this.insertNode(node, subtree.right);
-        return subtree;
+
+        if(node.val < subtree.val)
+        {
+            if(subtree.left === null)
+                subtree.left = node;
+            else
+                this.insertNode(node, subtree.left);
+        }
+        else
+        {
+            if(subtree.right === null)
+                subtree.right = node;
+            else
+                this.insertNode(node, subtree.right);
+        }
     };
 
     BinaryTree.prototype.locate = function(val){
@@ -34,13 +45,70 @@
             return this.locateNode(val, this.root);
     };
 
-    BinaryTree.prototype.locateNode = function(val, root){
+    BinaryTree.prototype.locateNode = function(find, subtree){
 
-        if(val === root.val)
-            return this.root;
-        else if(val <= root.val)
-            return this.locateNode(val, root.left);
-        else
-            return this.locateNode(val, root.right);
-    }
+        if (!subtree) {
+            return null;
+        }
+        else {
+            // found the matching node
+            if (find === subtree.val) {
+                return subtree;
+            }
+            else if (find < subtree.val) {
+                return this.locateNode(find, subtree.left);
+            }
+            else if (find > subtree.val) {
+                return this.locateNode(find, subtree.right);
+            }
+        }
+    };
+
+    BinaryTree.prototype.printPreOrder = function(subtree) {
+
+        if(subtree !== null)
+        {
+            console.log(subtree.val);
+            this.printPreOrder(subtree.left);
+            this.printPreOrder(subtree.right);
+        }
+    };
+
+    BinaryTree.prototype.printInOrder = function(subtree) {
+
+        if(subtree !== null)
+        {
+            this.printInOrder(subtree.left);
+            console.log(subtree.val);
+            this.printInOrder(subtree.right);
+        }
+    };
+
+    BinaryTree.prototype.printPostOrder = function(subtree) {
+
+        if(subtree !== null)
+        {
+            this.printPostOrder(subtree.left);
+            this.printPostOrder(subtree.right);
+            console.log(subtree.val);
+        }
+
+    };
+
+    let tree = new BinaryTree();
+    tree.insert(20);
+    tree.insert(10);
+    tree.insert(15);
+    tree.insert(16);
+    tree.insert(5);
+    tree.insert(8);
+    tree.insert(25);
+
+    console.log(tree.locate(15));
+
+    tree.printPreOrder(tree.root);
+    console.log('\n\n');
+    tree.printInOrder(tree.root);
+    console.log('\n\n');
+    tree.printPostOrder(tree.root);
 }());
