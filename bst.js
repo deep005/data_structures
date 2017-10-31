@@ -132,7 +132,16 @@
       else
           return this.findMinNode(node.left);
     };
+    //finding the max node
+    BinaryTree.prototype.findMaxNode = function(node){
+        if(node.right === null)
+            return node;
+        else
+            return this.findMaxNode(node.right);
+    };
 
+    //finding the depth of the bst
+    
     //deleting a node
     BinaryTree.prototype.delete = function(key){
         if(this.root === null)
