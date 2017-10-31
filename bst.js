@@ -133,7 +133,46 @@
           return this.findMinNode(node.left);
     };
 
-
+    //deleting a node
+    BinaryTree.prototype.delete = function(key){
+        if(this.root === null)
+            return null;
+        else {
+            this.root = this.deleteNode(this.root, key);
+            return this.root;
+        }
+    };
+    BinaryTree.prototype.deleteNode = function(node, key){
+        if(node === null)
+            return null;
+        else if(key < node.val){
+            node.left = this.deleteNode(node.left, key);
+            return node;
+        }
+        else if(key > node.val){
+            node.right = this.deleteNode(node.right, key);
+            return node;
+        }
+        else {
+            if (node.left === null && node.right === null) {
+                node = null;
+                return node;
+            }
+            if (node.left === null) {
+                node = node.right;
+                return node;
+            }
+            if (node.right === null) {
+                node = node.left;
+                return node;
+            }
+            //finding the minimum val on the right subtree of the node to maintain bst
+            let aux = this.findMinNode(node.right);
+            node.val = aux.val;
+            node.right = this.deleteNode(node.right, aux.val);
+            return node;
+        }
+    };
 
     let tree = new BinaryTree();
     tree.insert(20);
@@ -153,5 +192,8 @@
     tree.printPostOrder(tree.root);
     console.log('\n\n');
     console.log(tree.BFSltr());
+    console.log(tree.findMinNode(tree.root));
+    console.log(tree.delete(20));
+    console.log(tree.delete(5));
     console.log(tree.BFSrtl());
 }());
