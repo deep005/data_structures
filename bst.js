@@ -125,6 +125,14 @@
         return result;
     };
 
+    //finding the min node
+    BinaryTree.prototype.findMinNode = function(node){
+      if(node.left === null)
+          return node;
+      else
+          return this.findMinNode(node.left);
+    };
+
 
 
     let tree = new BinaryTree();
