@@ -141,7 +141,38 @@
     };
 
     //finding the depth of the bst
-    
+    BinaryTree.prototype.depth = function(node) {
+        let maxDepth = 0,
+            traverse = function(node, depth){
+                if(!node)
+                    return null;
+                maxDepth = depth > maxDepth ? depth : maxDepth;
+                traverse(node.left, depth+1);
+                traverse(node.right, depth+1);
+            };
+        traverse(this.root, 0);
+        return maxDepth;
+    };
+
+    //counting leaf nodes
+    BinaryTree.prototype.countLeaves = function(node) {
+        let count = 0,
+            traverse = function(node){
+                if(!node)
+                    return null;
+                if(node.left === null && node.right === null){
+                    count++;
+                }
+                else{
+                    traverse(node.left);
+                    traverse(node.right);
+                }
+            };
+        traverse(this.root);
+        return count;
+    };
+
+
     //deleting a node
     BinaryTree.prototype.delete = function(key){
         if(this.root === null)
@@ -202,7 +233,12 @@
     console.log('\n\n');
     console.log(tree.BFSltr());
     console.log(tree.findMinNode(tree.root));
+    console.log(tree.depth(tree.root));
+    console.log(tree.countLeaves(tree.root));
     console.log(tree.delete(20));
-    console.log(tree.delete(5));
+    console.log(tree.delete(16));
     console.log(tree.BFSrtl());
+    console.log(tree.depth(tree.root));
+    console.log(tree.countLeaves(tree.root));
+
 }());
