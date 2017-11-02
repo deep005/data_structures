@@ -28,5 +28,35 @@
     };
     MaxHeap.prototype.delete = function(){
 
+        this.items[0] = this.items[size];
+        this.items.pop();
+        this.size--;
+
+        let current = this.items[0],
+            currentPos=0,
+            leftIndex, rightIndex, replaceIndex;
+
+        while(current){
+
+            leftIndex = (currentPos *2)+1;
+            rightIndex = (currentPos *2)+2;
+            if(this.items[left] > current && this.items[left] > this.items[right]){
+                replaceIndex = leftIndex;
+            }
+            else if(this.items[right] > current && this.items[right] > this.items[left]){
+                replaceIndex = rightIndex;
+            }
+            else{
+                break;
+            }
+
+            this.items[currentPos] = this.items[replaceIndex];
+            this.items[replaceIndex] = current;
+
+            currentPos = replaceIndex;
+            current = this.items[replaceIndex];
+        }
     };
+
+    
 }());
