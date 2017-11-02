@@ -28,7 +28,7 @@
     };
     MaxHeap.prototype.delete = function(){
 
-        this.items[0] = this.items[size];
+        this.items[0] = this.items[this.size];
         this.items.pop();
         this.size--;
 
@@ -40,10 +40,10 @@
 
             leftIndex = (currentPos *2)+1;
             rightIndex = (currentPos *2)+2;
-            if(this.items[left] > current && this.items[left] > this.items[right]){
+            if(this.items[leftIndex] > current && this.items[leftIndex] > this.items[rightIndex]){
                 replaceIndex = leftIndex;
             }
-            else if(this.items[right] > current && this.items[right] > this.items[left]){
+            else if(this.items[rightIndex] > current && this.items[rightIndex] > this.items[leftIndex]){
                 replaceIndex = rightIndex;
             }
             else{
@@ -58,5 +58,24 @@
         }
     };
 
-    
+    let heap = new MaxHeap();
+    heap.insert(20);
+    heap.insert(13);
+    heap.insert(9);
+    heap.insert(8);
+    heap.insert(5);
+    heap.insert(3);
+    heap.insert(7);
+    heap.insert(6);
+    heap.insert(2);
+    heap.insert(1);
+    heap.insert(19);
+    heap.insert(25);
+
+    heap.delete();
+    console.log(heap.items);
+    heap.delete();
+    console.log(heap.items);
+
+
 }());
